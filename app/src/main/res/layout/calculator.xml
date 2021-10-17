@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/calculator"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/changeCurrencyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@color/transparent"
+            android:contentDescription="@string/icon_for_changing_currency"
+            android:padding="10dp"
+            android:src="@drawable/ic_more_vert"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="40dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:maxLines="2"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/clear"
+            style="@style/calculatorBtn"
+            android:text="@string/c"
+            android:textColor="@color/green" />
+
+        <Button
+            android:id="@+id/plus_minus"
+            style="@style/calculatorBtn"
+            android:text="@string/plus_minus"
+            android:textColor="@color/green" />
+
+        <Button
+            android:id="@+id/currency"
+            style="@style/calculatorBtn"
+            android:text="@string/currency_symbol"
+            android:textColor="@color/light_green" />
+
+        <Button
+            android:id="@+id/div"
+            style="@style/calculatorBtn"
+            android:text="@string/div_symbol"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/num_7"
+            style="@style/calculatorBtn"
+            android:text="@string/_7" />
+
+        <Button
+            android:id="@+id/num_8"
+            style="@style/calculatorBtn"
+            android:text="@string/_8" />
+
+        <Button
+            android:id="@+id/num_9"
+            style="@style/calculatorBtn"
+            android:text="@string/_9" />
+
+        <Button
+            android:id="@+id/times"
+            style="@style/calculatorBtn"
+            android:text="@string/times_symbol"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/num_4"
+            style="@style/calculatorBtn"
+            android:text="@string/_4" />
+
+        <Button
+            android:id="@+id/num_5"
+            style="@style/calculatorBtn"
+            android:text="@string/_5" />
+
+        <Button
+            android:id="@+id/num_6"
+            style="@style/calculatorBtn"
+            android:text="@string/_6" />
+
+        <Button
+            android:id="@+id/minus"
+            style="@style/calculatorBtn"
+            android:text="@string/minus_symbol"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/num_1"
+            style="@style/calculatorBtn"
+            android:text="@string/_1" />
+
+        <Button
+            android:id="@+id/num_2"
+            style="@style/calculatorBtn"
+            android:text="@string/_2" />
+
+        <Button
+            android:id="@+id/num_3"
+            style="@style/calculatorBtn"
+            android:text="@string/_3" />
+
+        <Button
+            android:id="@+id/add"
+            style="@style/calculatorBtn"
+            android:text="@string/add_symbol"
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/num_0"
+            style="@style/calculatorBtn"
+            android:layout_weight="2"
+            android:text="@string/_0" />
+
+        <Button
+            android:id="@+id/comma"
+            style="@style/calculatorBtn"
+            android:text="@string/dot_symbol" />
+
+        <Button
+            android:id="@+id/equals"
+            style="@style/calculatorBtn"
+            android:text="@string/equals_symbol"
+            android:textColor="@color/green" />
+    </LinearLayout>
+</LinearLayout>
