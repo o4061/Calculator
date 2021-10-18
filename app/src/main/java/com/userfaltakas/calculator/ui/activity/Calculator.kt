@@ -2,6 +2,7 @@ package com.userfaltakas.calculator.ui.activity
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,6 +86,7 @@ class Calculator : AppCompatActivity() {
                     setCurrencyAvailable()
                 }
                 is Resource.Error -> {
+                    Log.d("Connection Error", response.message.toString())
                     setCurrencyUnavailable()
                 }
             }

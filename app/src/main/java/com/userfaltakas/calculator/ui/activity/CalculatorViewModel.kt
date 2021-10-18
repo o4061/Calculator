@@ -34,7 +34,7 @@ class CalculatorViewModel @Inject constructor(
     var _error = MutableLiveData<String>()
 
     fun getCurrencies() = viewModelScope.launch {
-        delay(1000)
+        delay(500)
         currencyResponse.postValue(Resource.Loading())
         val response = currencyRepository.getCurrencies()
         currencyResponse.postValue(response)

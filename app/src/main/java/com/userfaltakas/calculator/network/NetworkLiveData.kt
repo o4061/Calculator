@@ -26,23 +26,25 @@ object NetworkLiveData : LiveData<Boolean>() {
     }
 
     private fun getDetails() {
-        val cm =
+        val connectivityManager =
             this.application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        cm.registerNetworkCallback(networkRequest, object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                postValue(true)
-            }
+        connectivityManager.registerNetworkCallback(
+            networkRequest,
+            object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    postValue(true)
+                }
 
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                postValue(false)
-            }
+                override fun onLost(network: Network) {
+                    super.onLost(network)
+                    postValue(false)
+                }
 
-            override fun onUnavailable() {
-                super.onUnavailable()
-                postValue(false)
-            }
-        })
+                override fun onUnavailable() {
+                    super.onUnavailable()
+                    postValue(false)
+                }
+            })
     }
 }
