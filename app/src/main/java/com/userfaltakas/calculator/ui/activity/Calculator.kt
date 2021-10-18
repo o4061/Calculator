@@ -2,7 +2,6 @@ package com.userfaltakas.calculator.ui.activity
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,10 @@ import com.userfaltakas.calculator.databinding.CalculatorBinding
 import com.userfaltakas.calculator.databinding.ChangeCurrencyDialogBinding
 import com.userfaltakas.calculator.network.NetworkLiveData
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class Calculator : AppCompatActivity() {
@@ -86,11 +89,20 @@ class Calculator : AppCompatActivity() {
                     setCurrencyAvailable()
                 }
                 is Resource.Error -> {
-                    Log.d("Connection Error", response.message.toString())
                     setCurrencyUnavailable()
+                    if (viewModel.canResendRequest()) {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            resendRequest()
+                        }
+                    }
                 }
             }
         })
+    }
+
+    private suspend fun resendRequest() {
+        delay(1000)
+        getCurrencies()
     }
 
     private fun setCurrencyUnavailable() {

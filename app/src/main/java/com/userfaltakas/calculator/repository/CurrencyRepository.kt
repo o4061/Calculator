@@ -3,6 +3,7 @@ package com.userfaltakas.calculator.repository
 import com.userfaltakas.calculator.api.CurrencyAPI
 import com.userfaltakas.calculator.api.Resource
 import com.userfaltakas.calculator.data.CurrencyResponse
+import java.io.IOException
 import javax.inject.Inject
 
 class CurrencyRepository @Inject constructor(
@@ -18,7 +19,7 @@ class CurrencyRepository @Inject constructor(
             } else {
                 Resource.Error(response.message())
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             Resource.Error(e.message.toString())
         }
     }

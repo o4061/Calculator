@@ -5,4 +5,5 @@ object Constants {
     const val BASE_URL = "http://data.fixer.io/api/"
     const val FROM_CURRENCY = "EUR"
     const val TO_CURRENCY = "GBP"
+    const val MAX_REQUESTS = 3
 }

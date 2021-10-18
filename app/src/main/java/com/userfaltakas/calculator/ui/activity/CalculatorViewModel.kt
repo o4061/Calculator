@@ -4,12 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.userfaltakas.calculator.api.Resource
+import com.userfaltakas.calculator.constant.Constants
 import com.userfaltakas.calculator.constant.Constants.FROM_CURRENCY
 import com.userfaltakas.calculator.constant.Constants.TO_CURRENCY
 import com.userfaltakas.calculator.data.CurrencyResponse
 import com.userfaltakas.calculator.repository.CurrencyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.mariuszgromada.math.mxparser.Expression
 import java.text.DecimalFormat
@@ -20,6 +20,7 @@ class CalculatorViewModel @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
     val currencyResponse = MutableLiveData<Resource<CurrencyResponse>>()
+    private var numOfRepeatedRequests = 0
     private var isCurrenciesInitialized = false
     private var canAddOperation = false
     private var canAddDecimal = true
@@ -35,7 +36,6 @@ class CalculatorViewModel @Inject constructor(
 
     fun getCurrencies() = viewModelScope.launch {
         currencyResponse.postValue(Resource.Loading())
-        delay(1000)
         val response = currencyRepository.getCurrencies()
         currencyResponse.postValue(response)
     }
@@ -56,10 +56,16 @@ class CalculatorViewModel @Inject constructor(
     fun conversion() {
         val fromCurrencyValue = currencyResponse.value?.data?.rates?.get(fromCurrency)
         val toCurrencyValue = currencyResponse.value?.data?.rates?.get(toCurrency)
-        if (fromCurrencyValue != null && toCurrencyValue != null && result.isNotEmpty() && !isExpression()) {
-            val number = (result.toDouble() * (1 / fromCurrencyValue) * toCurrencyValue)
-            result = String.format("%.3f", number).replace(",", ".")
-            _result.postValue(result)
+        if (fromCurrencyValue != null && toCurrencyValue != null) {
+            if (result.isNotEmpty() && !isExpression()) {
+                val number = (result.toDouble() * (1 / fromCurrencyValue) * toCurrencyValue)
+                result = String.format("%.3f", number).replace(",", ".")
+                _result.postValue(result)
+            } else {
+                _error.postValue("Wrong input!")
+            }
+        } else {
+            _error.postValue("No currencies available!")
         }
     }
 
@@ -153,5 +159,10 @@ class CalculatorViewModel @Inject constructor(
         } catch (e: Exception) {
             _error.postValue("Error!")
         }
+    }
+
+    fun canResendRequest(): Boolean {
+        numOfRepeatedRequests++
+        return numOfRepeatedRequests <= Constants.MAX_REQUESTS
     }
 }
